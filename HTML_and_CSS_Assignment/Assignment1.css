@@ -1,0 +1,126 @@
+body{
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    /* font-family :Verdana, Geneva, Tahoma, sans-serif  ; */
+    /* font-family: 'Poppins', sans-serif; */
+    font-family: 'Poppins', sans-serif;
+}
+
+.td-div-para{
+    max-width: 300px;
+}
+*{
+    margin : 0px;
+    padding : 0px;
+}
+#main-container{
+    border : 2px solid black;
+    /* width : 55%;   */
+    width: auto;
+    /* height : 1126px; */
+    height : auto;
+    position : absolute ;
+    top : 70px;
+    padding : 30px;
+    box-shadow : 7px 8px 6px 3px grey; 
+    
+}
+.header{
+    display : flex;
+    flex-direction : column;
+    justify-content : center;
+    align-items : center;
+    border : 2px solid black;
+}
+
+.inner-head-para{
+    text-align: center;
+    font-weight: 500;
+    font-size : 40px;
+    font-family :Verdana, Geneva, Tahoma, sans-serif  ;
+    margin : 28px;  
+    
+}
+#head-inner{
+    display : flex;
+    align-items : center;
+    justify-content: center;
+    font-family :Verdana, Geneva, Tahoma, sans-serif  ;
+
+}
+
+#inner-para{
+    font-weight : 500;
+    font-size  : 40px;
+}
+
+#girl-image{
+    background-image : url('assignment_Waali.png');
+    width : 285px;  
+    height : 200px;
+    background-position: center;
+    border : 2px solid black;
+}
+
+#girl-image , #inner-para{
+    margin : 15px 60px 60px 60px;
+}
+
+
+/* Mid section Table */
+
+.mid-title{
+    margin : 20px 0px;
+}
+
+
+.td-div{
+    display : flex;
+    flex-direction : column;
+    align-items: center ;
+    /* justify-content : center; */
+    border : 2px solid black;
+    width: 450px;
+    height : 250px;
+    margin-left : 20px;
+    margin-top : 5px;
+    margin-bottom : 20px;
+    /* width : 400px; 
+    height : 200px; */
+}
+.td-div h2{
+    margin : 12px;
+    font-size : 36px;   
+}
+
+.td-div p{
+    font-size : 30px;  
+    text-align: center;
+}
+
+.mid-table{
+    border : 2px solid black;
+    width: 100%;
+    padding-left : 10px;
+    padding-bottom : 15px;
+    margin-top : 15px;
+}
+
+#r1-l1 , #r1-l2{
+    position : relative;
+    left : -10px;
+}
+
+.footer{
+    border : 2px solid black;
+    display : flex;
+    align-items: center;
+    justify-content: center;
+    height : 110px;
+    margin-top : 20px;
+}
+.footer h1{
+    font-size : 40px;
+    font-weight: 500;
+}
