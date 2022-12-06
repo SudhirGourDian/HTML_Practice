@@ -1,0 +1,27 @@
+body{
+    height : 100vh;
+    }
+    .profilePic {
+    width: 30px;
+    height: 30px;
+    }
+    .mypic {
+    width: 100px;
+    height: 100px;
+    }
+    .vertical_nav {
+    padding-top: 7.1rem;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    }
+    .contact-icons {
+    font-size: 28px;
+    }
+    .dianLogo {
+    width: 170px;
+    height: 60px;
+    }
+    .title-container {
+    max-width: 100% !important;
+    }
