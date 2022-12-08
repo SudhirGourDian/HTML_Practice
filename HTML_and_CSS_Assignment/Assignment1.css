@@ -27,18 +27,36 @@ body{
     box-shadow : 7px 8px 6px 3px grey; 
     margin : 20px;
 }
-@media screen and (max-width : 1540px ){
+@media screen and (min-width : 1275px) and (max-width : 1540px ){
     .td-div p{
         font-size : 20px;
     }
     
 }
-@media screen and (max-width : 1275px ){
+@media screen and (min-width : 800px) and (max-width : 1275px ){
     .td-div p{
         font-size : 22px !important;
     }
-    
+
+    .box-headings{
+        font-size : 25px !important;
+        font-weight : 800;
+    }
 }
+@media screen and (max-width : 800px ){
+    .td-div p{
+        font-size : 16px !important;
+    }
+
+    .box-headings{
+        font-size : 20px !important;
+        font-weight : 800;
+    }
+    #girl-image{
+        /* display : block !important;  */
+    }
+}
+
 .header{
     display : flex;
     flex-direction : column;
@@ -62,6 +80,8 @@ body{
     font-family :Verdana, Geneva, Tahoma, sans-serif  ;
 
 }
+
+
 
 #inner-para{
     font-weight : 500;
@@ -96,6 +116,7 @@ body{
     border : 2px solid black;
     /* width: 450px; */
     height : 250px;
+    /* height : auto; */
     margin-left : 20px;
     margin-top : 5px;
     margin-bottom : 20px;
