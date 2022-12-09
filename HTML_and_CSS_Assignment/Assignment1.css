@@ -47,14 +47,20 @@ body{
     .td-div p{
         font-size : 16px !important;
     }
-
+    .inner-head-para{
+        font-size : 30px !important;
+    }
+    #inner-para{
+        font-size : 20px !important;
+    }
     .box-headings{
         font-size : 20px !important;
         font-weight : 800;
     }
     #girl-image{
-        /* display : block !important;  */
+        margin-left : 100px !important;
     }
+    
 }
 
 .header{
