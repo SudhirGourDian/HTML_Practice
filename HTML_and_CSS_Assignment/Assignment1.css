@@ -15,7 +15,7 @@ body{
     margin : 0px;
     padding : 0px;
 } */
-#main-container{
+.main-container{
     display : flex;
     flex-direction : column;
     border : 2px solid black;
@@ -50,14 +50,14 @@ body{
     .inner-head-para{
         font-size : 30px !important;
     }
-    #inner-para{
+    .inner-para{
         font-size : 20px !important;
     }
     .box-headings{
         font-size : 20px !important;
         font-weight : 800;
     }
-    #girl-image{
+    .top-image{
         margin-left : 100px !important;
     }
     
@@ -79,7 +79,7 @@ body{
     /* margin : 28px;   */
     
 }
-#head-inner{
+.head-inner{
     display : flex;
     align-items : center;
     justify-content: center;
@@ -89,20 +89,20 @@ body{
 
 
 
-#inner-para{
+.inner-para{
     font-weight : 500;
     font-size  : 40px;
 }
 
-#girl-image{
-    background-image : url('assignment_Waali.png');
+.top-image{
+    background-image : url('Image1.png');
     width : 285px;  
     height : 200px;
     background-position: center;
     border : 2px solid black;
 }
 
-#girl-image , #inner-para{
+.top-image , .inner-para{
     margin : 15px 60px 60px 60px;
 }
 
@@ -149,7 +149,7 @@ body{
 .section{
     display: flex;
 }
-#r1-l1 , #r1-l2{
+.r1-l1 , .r1-l2{
     position : relative;
     left : -10px;
 }
