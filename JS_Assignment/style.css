@@ -1,0 +1,14 @@
+.card-bg {
+    height: 320px;
+    position: relative;
+    display: inline-block;
+}
+
+/* @media (max-width : 1164){ */
+@media (min-width : 765px ) and (max-width : 1906px ) {
+    .desc{
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+}s
