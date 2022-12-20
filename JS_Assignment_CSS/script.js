@@ -74,7 +74,7 @@ const cardHTML = allProducts.map((curr_obj) => {
             <p class = "desc" >${curr_obj.desc}</p>
             <p class = "prod-code">Product Code: ${curr_obj.code}</p>
             <div class="read-more-less"> 
-                <a class  =  "toggle-link" onclick = "showContent('${curr_obj.PId}')"> See More Information </a>
+                <a class  =  "toggle-link ${curr_obj.PId}" onclick = "showContent('${curr_obj.PId}')"> See More Information </a>
                 <p id = "${curr_obj.PId}" style = "display : none;">This is the Product Description with this particular Product Id </p>
             </div>
             <span class = "prod-price">Price : SEK ${curr_obj.price}</span>
@@ -96,7 +96,7 @@ const cardHTML = allProducts.map((curr_obj) => {
         <p class = "prod-code">Product Code: ${curr_obj.code}</p>
         
             <div class="read-more-less"> 
-                <a class  =  "toggle-link" onclick = "showContent('${curr_obj.PId}')"> See More Information </a>
+                <a class  =  "toggle-link ${curr_obj.PId}" onclick = "showContent('${curr_obj.PId}')"> See More Information </a>
                 <p id = "${curr_obj.PId}" style = "display : none;">This is the Product Description with this particular Product Id </p>
             </div>
         
@@ -197,12 +197,17 @@ function removeWishList(index, price, pid) {
 // Read more / Read less :
 
 function showContent(pid) {
+    let p_element = document.getElementsByClassName(pid)[0];
+    console.log(p_element.innerHTML);
     let element = document.getElementById(pid);
     if (element.style.display != "none") {
         element.style.display = "none";
+        p_element.innerHTML = "Show More Information";
     }
     else {
         element.style.display = "block";
+        p_element.innerHTML = "Show Less Information";
+
     }
 
 }

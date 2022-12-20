@@ -53,7 +53,7 @@
 .card-container{
     display : grid;
     grid-template-columns: auto  auto  auto;
-    grid-template-rows : 590px 590px;
+    grid-template-rows : 530px 530px;
 }
 
 .wish-list-h1{
@@ -72,6 +72,7 @@
     justify-content: end;
     align-items: center;
     margin-top : 20px;
+    margin-right : 20px;
 }
 
 .prod-name{
@@ -93,9 +94,10 @@
 
 .add-btn{
     background-color: black;
+    text-align: center;
     color : white;
-    height : 25px;
-    padding : 4px;
+    height : 31px;
+    padding : 8px;
     border-radius: 5px;
     margin-right : 5px;
     margin-bottom : 10px;
