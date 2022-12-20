@@ -74,7 +74,7 @@ const cardHTML = allProducts.map((curr_obj) => {
             <p class = "desc" >${curr_obj.desc}</p>
             <p class = "prod-code">Product Code: ${curr_obj.code}</p>
             <div class="read-more-less"> 
-                <a class  =  "toggle-link ${curr_obj.PId}" onclick = "showContent('${curr_obj.PId}')"> See More Information </a>
+                <a class  =  "toggle-link ${curr_obj.PId}" onclick = "showContent('${curr_obj.PId}')"> See More Information <i class="fa-sharp fa-solid fa-chevron-down"></i> </a>
                 <p id = "${curr_obj.PId}" style = "display : none;">This is the Product Description with this particular Product Id </p>
             </div>
             <span class = "prod-price">Price : SEK ${curr_obj.price}</span>
@@ -96,7 +96,7 @@ const cardHTML = allProducts.map((curr_obj) => {
         <p class = "prod-code">Product Code: ${curr_obj.code}</p>
         
             <div class="read-more-less"> 
-                <a class  =  "toggle-link ${curr_obj.PId}" onclick = "showContent('${curr_obj.PId}')"> See More Information </a>
+                <a class  =  "toggle-link ${curr_obj.PId}" onclick = "showContent('${curr_obj.PId}')"> See More Information <i class="fa-sharp fa-solid fa-chevron-down"></i> </a>
                 <p id = "${curr_obj.PId}" style = "display : none;">This is the Product Description with this particular Product Id </p>
             </div>
         
@@ -202,11 +202,11 @@ function showContent(pid) {
     let element = document.getElementById(pid);
     if (element.style.display != "none") {
         element.style.display = "none";
-        p_element.innerHTML = "Show More Information";
+        p_element.innerHTML = "Show More Information <i class='fa-sharp fa-solid fa-chevron-down'></i> ";
     }
     else {
         element.style.display = "block";
-        p_element.innerHTML = "Show Less Information";
+        p_element.innerHTML = "Show Less Information <i class='fa-solid fa-chevron-up'> </i> ";
 
     }
 
