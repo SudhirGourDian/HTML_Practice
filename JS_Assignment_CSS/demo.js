@@ -110,7 +110,7 @@ const cardHTML = allProducts.map((curr_obj) => {
 
 });
 
-// let totalPrice = 0;
+let totalPrice = 0;
 
 let Wishlists = [];
 
@@ -124,22 +124,13 @@ for (let i = 0; i < cardHTML.length; i++) {
 
 
 function addItem(PID) {
-    let { PId, price } = findObj(PID);
-    
-    let myob = {
-        "pid" : PId,
-        "price" : price
-
-    };
-
-    if (!Wishlists.includes(myob)) {
-        console.log(myob);
+    if (!Wishlists.includes(PID)) {
+        console.log(PID);
         let { name, price, MRP } = findObj(PID);
-        addWish(name, price, MRP, PID , );
+        addWish(name, price, MRP, PID);
         
         
-        Wishlists.push(myob);
-
+        Wishlists.push(PID);
     }
     else {
         alert("This item already exists in the list");
@@ -172,25 +163,17 @@ function addWish(name, price, mrp, pid) {
         `;
         ind++;
     }
-    // totalPrice += parseInt(price);
+    totalPrice += parseInt(price);
     changeTotal();
 
 }
 
 // To change the total price when Item is added or deleted.
 
-
 function changeTotal() {
-    let totalPrice = Wishlists.reduce(()=>{
-
-    });
+    document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${totalPrice}`;
     console.log(totalPrice);
 }
-
-// function changeTotal() {
-//     document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${totalPrice}`;
-//     console.log(totalPrice);
-// }
 
 // To remove items when remove link is clicked : 
 
@@ -203,14 +186,7 @@ function removeWishList(index, price, pid) {
 
 
     // Removing the element Pid from wishlist if the li item is removed : 
-    let myobj = {
-        "pid" : pid,
-        "price" : price
-
-    };
-
-    let ind_rem = Wishlists.indexOf(myobj);
-
+    let ind_rem = Wishlists.indexOf(pid);
     Wishlists.splice(ind_rem, 1);
 
 
