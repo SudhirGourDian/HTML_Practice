@@ -76,7 +76,7 @@ const cardHTML = allProducts.map((curr_obj) =>{
                 <p class="card-text code">Product Code: ${curr_obj.code}</p>
                 <div class="mb-5"> 
                     <a class  =  "text-decoration-none" onclick = "showContent('${curr_obj.PId}')"> See More Information </a>
-                    <p id = "${curr_obj.PId}" style = "display : none;">This is the Product Description with this particular Product Id </p>
+                    <p id = "${curr_obj.PId}" class  = "hid-para" style = "display : none;">This is the Product Description with this particular Product Id </p>
 
                 </div>
                 <span class="card-text price">Price : SEK ${curr_obj.price}</span>
@@ -90,7 +90,7 @@ const cardHTML = allProducts.map((curr_obj) =>{
     }
 
     return `
-    <div class = "col-md-6 col-lg-4 mb-4 ">
+    <div class = "col-md-6 col-lg-4 mb-4 card-colms">
         <div class="card shadow-sm">
             <img src='${curr_obj.image}' alt="" class="card-img-top card-top card-bg" style = "height : 250px;">
             <div class="card-body">
@@ -99,7 +99,7 @@ const cardHTML = allProducts.map((curr_obj) =>{
                 <p class="card-text code">Product Code: ${curr_obj.code}</p>
                 <div class="mb-5"> 
                     <a class  =  "text-decoration-none" onclick = "showContent('${curr_obj.PId}')"> See More Information </a>
-                    <p id = "${curr_obj.PId}" style = "display : none;">This is the Product Description with this particular Product Id </p>
+                    <p id = "${curr_obj.PId}" class = "hid-para" style = "display : none;">This is the Product Description with this particular Product Id </p>
 
                 </div>
                 <span class="card-text price">Price : SEK ${curr_obj.price}</span>
@@ -191,7 +191,6 @@ function removeWishList(index , price , pid){
     Wishlists.splice(ind_rem , 1);
 
     
-    ind--; // Reducing the index if the element is removed.
     changeTotal();
     element.remove();
     element2.remove();

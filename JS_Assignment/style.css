@@ -12,3 +12,17 @@
         white-space: nowrap !important;
     }
 }
+
+/* .card{
+    overflow-y : auto;
+} */
+/* .card-colms{
+    overflow-y : scroll;
+}   
+.card{
+    overflow-y: scroll !important;
+} */
+
+.hid-para{
+    overflow-x : scroll !important;
+}
