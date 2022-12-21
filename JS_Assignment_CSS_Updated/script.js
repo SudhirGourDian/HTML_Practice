@@ -78,7 +78,7 @@ const cardHTML = allProducts.map((curr_obj) => {
             <p class = "prod-code">Product Code: ${curr_obj.code}</p>
             <div class="read-more-less"> 
                 <a class  =  "toggle-link ${curr_obj.PId}1" onclick = "showContent('${curr_obj.PId}')"> See More Information <i class="fa-sharp fa-solid fa-chevron-down"></i> </a>
-                <p id = "${curr_obj.PId}1" style = "visibility : hidden;">This is the Product Description with this particular Product Id </p>
+                <p id = "${curr_obj.PId}1" class = "hidden-para" style = "visibility : hidden;">This is the Product Description with this particular Product Id . This is the sample content to check the working behind this hidden paragraph.There should be a scroll appear </p>
             </div>
             <span class = "prod-price">Price : SEK ${curr_obj.price}</span>
             ${del_tag}
@@ -92,7 +92,7 @@ const cardHTML = allProducts.map((curr_obj) => {
 
 
 let Wishlists = [];
-document.getElementsByClassName("card-container")[0].innerHTML = cardHTML.join("\n");
+document.getElementsByClassName("card-container")[0].innerHTML = cardHTML.join(" ");
 
 
 function retObj(PId){
@@ -161,4 +161,5 @@ function showContent(pid) {
         p_element.innerHTML = "Show Less Information <i class='fa-solid fa-chevron-up'> </i> ";
 
     }
+
 }

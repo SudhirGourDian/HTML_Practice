@@ -98,7 +98,8 @@ let Wishlists = [];
 console.log(cardHTML);
 // for (let i = 0; i < cardHTML.length; i++) {
     // console.log(cardHTML[i]);
-    document.getElementById("card-container").innerHTML = cardHTML;
+document.getElementById("card-container").innerHTML = cardHTML.join("\n");
+
 // }
 
 // Main function to add items , which calls addWish() and changeTotal() utility functions  :
