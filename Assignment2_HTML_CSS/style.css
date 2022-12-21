@@ -1,55 +1,111 @@
-.inside-content , .container{
+.inside-content{
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    flex-direction : column;
+    margin-top : 74px;
+}
+
+.container{
+    margin-top : 5vw;
+    margin-right : 12px;
     display : flex;
     align-items : center;
     justify-content : center;
     flex-direction : column;
 }
 
-
+body{
+    background-color: grey;
+}
 
 .strip-1{
-    width : 340px;
-    height : 30px;
-    background-color: blue;
+    width: 340px;
+    height: 30px;
+    background-color: rgb(255, 191, 0);
     transform: rotate(45deg);
-    position : relative;
-    top : 50px;
-    left : 50px;
-    right : 0px;
-    bottom : 0px;
-
+    position: relative;
+    top: 110px;
+    left: 123px;
+    right: 0px;
+    bottom: 0px;
+    z-index : 1;
+    opacity: 0.7;
 }
 .strip-2{
-    width : 340px;
-    height : 30px;
-    background-color: red;
-    transform : rotate(135deg);
-    position : relative;
-    top : 50px;
-    left : 50px;
-    right : 0px;
-    bottom : 0px;
+    width: 340px;
+    height: 30px;
+    background-color: white;
+    transform: rotate(135deg);
+    position: relative;
+    top: 80px;
+    left: -96px;
+    right: 0px;
+    bottom: 0px;
 }
 .strip-3{
-    width : 340px;
-    height : 30px;
-    background-color: green;
-    transform : rotate(225deg);
-    position : relative;
-    top : 50px;
-    left : 50px;
-    right : 0px;
-    bottom : 0px;
+    width: 340px;
+    height: 30px;
+    background-color: cyan;
+    transform: rotate(225deg);
+    position: relative;
+    top: 269px;
+    left: -96px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
 }
 .strip-4{
-    width : 340px;
-    height : 30px;
-    background-color: yellow;
-    transform : rotate(315deg);
-    position : relative;
-    top : 50px;
-    left : 50px;
-    right : 0px;
-    bottom : 0px;
+    width: 340px;
+    height: 30px;
+    background-color: white;
+    transform: rotate(315deg);
+    position: relative;
+    top: 239px;
+    left: 123px;
+    right: 0px;
+    bottom: 0px;
 
 }
+
+.inner-heading-1{
+    font-size : 38px;
+    color : white;
+    font-weight : 600;
+}
+
+.and_span{
+    color : orange !important; 
+}
+
+.inner-heading-2{
+    font-size : 26px;
+    color : white;
+    font-weight : 500;
+}
+
+.main-container{
+    display : flex;
+    flex-direction: column;
+    height : 100%;
+}
+
+html{
+    height : 100vh;
+}
+
+body{
+    height : 100vh;
+}
+
+.footer{
+    /* position : absolute; */
+    /* bottom : 10px; */
+    display : flex;
+    justify-content: center;
+    /* flex-direction : column; */
+    align-items: center;
+    color : white;
+    
+}
+

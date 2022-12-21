@@ -1,0 +1,16 @@
+body {
+    background-color: grey;
+}
+
+.parent{
+    width : 365px;
+    height : 365px;
+    background-color: lightcoral;
+    border-left : 30px solid white;
+    border-right : 30px solid white ;
+    border-bottom : 30px solid cyan ;
+    border-top : 30px solid rgb(255, 197,) ;
+
+    transform : rotate(45deg)
+}
+

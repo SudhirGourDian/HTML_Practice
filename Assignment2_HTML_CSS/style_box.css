@@ -1,0 +1,37 @@
+body{
+    background-color: grey;
+    margin : 0px;
+    padding : 0px;
+    box-sizing: border-box;
+}
+
+.box-white{
+    width : 365px ;
+    height : 365px;
+    /* background-color :white;  */
+    border : 35px solid white;
+    /* border-right : 35px solid black; */
+    transform: rotate(45deg);
+    min-width : 300px;
+}
+.box-2{
+    /* width : 365px ; */
+    width : 400px ;
+    position : relative;
+    /* display : none; */
+    top: -598px;
+    /* height : 365px; */
+    height : 435px;
+    background-color : red; 
+    /* border-left : 35px solid black; */
+    border-right : 35px solid black;
+    transform: rotate(-45deg);
+    min-width : 300px;
+    z-index  : -1;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top : 25vh;
+}

@@ -148,17 +148,42 @@ function removeWishList(PId) {
     document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${total_sum}`;
 }
 
+/* Read-more / Read-less Content : */
+// function showContent(pid) {
+//     let p_element = document.getElementsByClassName(pid+"1")[0];
+//     let element = document.getElementById(pid + "1");
+//     if (element.style.visibility != "hidden") {
+//         element.style.visibility = "hidden";
+//         p_element.innerHTML = "Show More Information <i class='fa-sharp fa-solid fa-chevron-down'></i> ";
+//     }
+//     else {
+//         element.style.visibility = "visible";
+//         p_element.innerHTML = "Show Less Information <i class='fa-solid fa-chevron-up'> </i> ";
 
+//     }
+
+// }
 function showContent(pid) {
     let p_element = document.getElementsByClassName(pid+"1")[0];
     let element = document.getElementById(pid + "1");
-    let readclass=element.style.visibility;
 
-    let content_size= readclass != "hidden"?"More":"less";
-    let icon_class= readclass != "hidden"?"fa-sharp fa-solid fa-chevron-down":"fa-sharp fa-solid fa-chevron-up";
-    element.style.visibility=readclass != "hidden"?"hidden":"visible";
+    let content_size = ``;
+    let icon_class = '';
 
-    p_element.innerHTML = `Show ${content_size} Information <i class='${icon_class}'></i>`;
+    (element.style.visiblity != "hidden")?(element.style.visibility = "hidden") : (element.style.visibility = "visible");
     
+    if (element.style.visibility != "hidden") {
+        element.style.visibility = "hidden";
+        
+        content_size = 'More';
+        icon_class = 'fa-sharp fa-solid fa-chevron-down';
+
+        p_element.innerHTML = "Show More Information <i class='fa-sharp fa-solid fa-chevron-down'></i> ";
+    }
+    else {
+        element.style.visibility = "visible";
+        p_element.innerHTML = "Show Less Information <i class='fa-solid fa-chevron-up'> </i> ";
+
+    }
 
 }
