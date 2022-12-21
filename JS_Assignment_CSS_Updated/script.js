@@ -65,125 +65,93 @@ function uniqueID() {
 }
 
 const cardHTML = allProducts.map((curr_obj) => {
-    let discountprice='';
-    if (curr_obj.MRP != 0) {
-        discountprice=`<del class = "mrp">SEK ${curr_obj.MRP}</del>`;
+    let del_tag = ``;
+    if(curr_obj.MRP != 0){
+        del_tag = `<del class = 'mrp'>SEK ${curr_obj.MRP}</del>`;
     }
-    return `
+
+        return `
         <div class="card">
             <img src='${curr_obj.image}' alt="sampleBackground" class = "card-image">
             <h4 class = "prod-name">${curr_obj.name}</h4>
             <p class = "desc" >${curr_obj.desc}</p>
             <p class = "prod-code">Product Code: ${curr_obj.code}</p>
             <div class="read-more-less"> 
-                <a class  =  "toggle-link ${curr_obj.PId}" onclick = "showContent('${curr_obj.PId}')"> See More Information <i class="fa-sharp fa-solid fa-chevron-down"></i> </a>
-                <p id = "${curr_obj.PId}" style = "visibility : hidden;">This is the Product Description with this particular Product Id </p>
+                <a class  =  "toggle-link ${curr_obj.PId}1" onclick = "showContent('${curr_obj.PId}')"> See More Information <i class="fa-sharp fa-solid fa-chevron-down"></i> </a>
+                <p id = "${curr_obj.PId}1" style = "visibility : hidden;">This is the Product Description with this particular Product Id </p>
             </div>
             <span class = "prod-price">Price : SEK ${curr_obj.price}</span>
-            ${discountprice}
-            
+            ${del_tag}
             <div class="card-btn">
                 <button class = "add-btn" onclick = "addItem('${curr_obj.PId}')">Add to list</button>
             </div>
         </div>
         `;
-    
-
 });
 
-let totalPrice = 0;
+
 
 let Wishlists = [];
-
-console.log(cardHTML);
-// for (let i = 0; i < cardHTML.length; i++) {
-    // console.log(cardHTML[i]);
-    document.getElementById("card-container").innerHTML = cardHTML;
-// }
-
-// Main function to add items , which calls addWish() and changeTotal() utility functions  :
+document.getElementsByClassName("card-container")[0].innerHTML = cardHTML.join("\n");
 
 
+function retObj(PId){
+    return allProducts.find((val)=>{ // will return the element that passed this function.
+        return (val.PId == PId)? val:undefined; 
+    });
+}
 
-function addItem(PID) {
-    if (!Wishlists.includes(PID)) {
-        console.log(PID);
-        let { name, price, MRP } = findObj(PID);
-        addWish(name, price, MRP, PID);
-        
-        
-        Wishlists.push(PID);
+function retTotal(){
+    return Wishlists.reduce((total , obj)=>{
+        return total + obj.price;
+    },0);
+}
+
+/* Add Item function that adds the item if it's not present in the WishList : */ 
+function addItem(PId){
+
+    let myObj = retObj(PId); // Returns the object matched with this PId passed as an argument;
+
+    if(!Wishlists.includes(myObj)){
+
+        let req_tag = (myObj.MRP == 0)?`(You saved 0)` : `(You saved ${myObj.MRP - myObj.price})`;
+        Wishlists.push(myObj);
+
+        let total_sum = retTotal();
+        document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${total_sum}`;
+
+        document.getElementsByClassName("wish-lists")[0].innerHTML += `<li class = "${myObj.PId}">${myObj.name} - SEK ${myObj.price} ${req_tag} <a class  =  "rm-btn ${myObj.PId}" onclick = "removeWishList('${myObj.PId}')" > Remove </a></li>`;
     }
-    else {
+    else{
         alert("This item already exists in the list");
     }
-}
-
-// To find the object with the given PID;
-
-function findObj(PId) {
-    for (let i = 0; i < allProducts.length; i++) {
-        if (PId == allProducts[i].PId) {
-            return allProducts[i];
-        }
-    }
-}
-
-// To add a list item when Add Item button is clicked :
-let ind = 0;
-function addWish(name, price, mrp, pid) {
-
-    // If there is no Discount
-    if (mrp == 0) {
-        document.getElementsByClassName("wish-lists")[0].innerHTML += `<li class = "${ind}">${name} - SEK ${price} (You saved ${0}) <a class  =  "rm-btn ${ind}" onclick = "removeWishList('${ind}' , '${price}','${pid}')" > Remove </a></li>`
-            ;
-        ind++;
-        
-    }
-    else { // If there is a discount then , we saved amount on that product ;
-        document.getElementsByClassName("wish-lists")[0].innerHTML += `<li class = "${ind}">${name} - SEK ${price} (You saved ${mrp - price}) <span class  =  " rm-btn ${ind}" onclick = "removeWishList('${ind}' , '${price}' , '${pid}')" > Remove </span></li>
-        `;
-        ind++;
-    }
-    totalPrice += parseInt(price);
-    changeTotal();
 
 }
 
-// To change the total price when Item is added or deleted.
 
-function changeTotal() {
-    document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${totalPrice}`;
-    console.log(totalPrice);
-}
+/* Removing Item on Clicking the remove button from WishList and HTML : */
+function removeWishList(PId) {
+    let myObj = retObj(PId);
 
-// To remove items when remove link is clicked : 
+    let element1 = document.getElementsByClassName(myObj.PId)[0];
+    let element2 = document.getElementsByClassName(myObj.PId)[1];
 
-function removeWishList(index, price, pid) {
-    console.log(price);
-    let element = document.getElementsByClassName(index)[0];
-    let element2 = document.getElementsByClassName(index)[1];
-
-    totalPrice -= parseInt(price);
-
-
-    // Removing the element Pid from wishlist if the li item is removed : 
-    let ind_rem = Wishlists.indexOf(pid);
-    Wishlists.splice(ind_rem, 1);
-
-
-     // Reducing the index if the element is removed.
-    changeTotal();
-    element.remove();
+    element1.remove();
     element2.remove();
+
+    let index = Wishlists.indexOf(myObj);
+    Wishlists.splice(index,1);
+
+    let total_sum = retTotal();
+    
+    // Displaying New Total Value after Deletion : 
+    document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${total_sum}`;
 }
 
-// Read more / Read less :
-
+/* Read-more / Read-less Content : */
 function showContent(pid) {
-    let p_element = document.getElementsByClassName(pid)[0];
-    console.log(p_element.innerHTML);
-    let element = document.getElementById(pid);
+    let p_element = document.getElementsByClassName(pid+"1")[0];
+    let element = document.getElementById(pid + "1");
     if (element.style.visibility != "hidden") {
         element.style.visibility = "hidden";
         p_element.innerHTML = "Show More Information <i class='fa-sharp fa-solid fa-chevron-down'></i> ";
@@ -193,5 +161,4 @@ function showContent(pid) {
         p_element.innerHTML = "Show Less Information <i class='fa-solid fa-chevron-up'> </i> ";
 
     }
-
 }

@@ -65,11 +65,9 @@ function uniqueID() {
 }
 
 const cardHTML = allProducts.map((curr_obj) => {
-    let discountprice='';
+
     if (curr_obj.MRP != 0) {
-        discountprice=`<del class = "mrp">SEK ${curr_obj.MRP}</del>`;
-    }
-    return `
+        return `
         <div class="card">
             <img src='${curr_obj.image}' alt="sampleBackground" class = "card-image">
             <h4 class = "prod-name">${curr_obj.name}</h4>
@@ -80,39 +78,68 @@ const cardHTML = allProducts.map((curr_obj) => {
                 <p id = "${curr_obj.PId}" style = "visibility : hidden;">This is the Product Description with this particular Product Id </p>
             </div>
             <span class = "prod-price">Price : SEK ${curr_obj.price}</span>
-            ${discountprice}
-            
+            <del class = "mrp">SEK ${curr_obj.MRP}</del>
             <div class="card-btn">
                 <button class = "add-btn" onclick = "addItem('${curr_obj.PId}')">Add to list</button>
             </div>
         </div>
         `;
-    
+    }
+    else{
+
+        return `
+        <div class="card">
+        <img src='${curr_obj.image}' alt="sampleBackground" class = "card-image">
+        <h4 class = "prod-name">${curr_obj.name}</h4>
+        <p class = "desc">${curr_obj.desc}</p>
+        
+        <p class = "prod-code">Product Code: ${curr_obj.code}</p>
+        
+            <div class="read-more-less"> 
+                <a class  =  "toggle-link ${curr_obj.PId}" onclick = "showContent('${curr_obj.PId}')"> See More Information <i class="fa-sharp fa-solid fa-chevron-down"></i> </a>
+                <p id = "${curr_obj.PId}" style = "visibility : hidden;">This is the Product Description with this particular Product Id </p>
+            </div>
+        
+        <span class = "prod-price">Price : SEK ${curr_obj.price}</span>
+        <div class="card-btn">
+        <button class = "add-btn" onclick = "addItem('${curr_obj.PId}')">Add to list</button>
+        </div>
+        </div>
+        `;
+    }
 
 });
 
-let totalPrice = 0;
+// let totalPrice = 0;
 
 let Wishlists = [];
 
-console.log(cardHTML);
-// for (let i = 0; i < cardHTML.length; i++) {
+for (let i = 0; i < cardHTML.length; i++) {
     // console.log(cardHTML[i]);
-    document.getElementById("card-container").innerHTML = cardHTML;
-// }
+    document.getElementsByClassName("card-container")[0].innerHTML += cardHTML[i];
+}
 
 // Main function to add items , which calls addWish() and changeTotal() utility functions  :
 
 
 
 function addItem(PID) {
-    if (!Wishlists.includes(PID)) {
-        console.log(PID);
+    let { PId, price } = findObj(PID);
+    
+    let myob = {
+        "pid" : PId,
+        "price" : price
+
+    };
+
+    if (!Wishlists.includes(myob)) {
+        console.log(myob);
         let { name, price, MRP } = findObj(PID);
-        addWish(name, price, MRP, PID);
+        addWish(name, price, MRP, PID , );
         
         
-        Wishlists.push(PID);
+        Wishlists.push(myob);
+
     }
     else {
         alert("This item already exists in the list");
@@ -145,17 +172,25 @@ function addWish(name, price, mrp, pid) {
         `;
         ind++;
     }
-    totalPrice += parseInt(price);
+    // totalPrice += parseInt(price);
     changeTotal();
 
 }
 
 // To change the total price when Item is added or deleted.
 
+
 function changeTotal() {
-    document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${totalPrice}`;
+    let totalPrice = Wishlists.reduce(()=>{
+
+    });
     console.log(totalPrice);
 }
+
+// function changeTotal() {
+//     document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${totalPrice}`;
+//     console.log(totalPrice);
+// }
 
 // To remove items when remove link is clicked : 
 
@@ -168,7 +203,14 @@ function removeWishList(index, price, pid) {
 
 
     // Removing the element Pid from wishlist if the li item is removed : 
-    let ind_rem = Wishlists.indexOf(pid);
+    let myobj = {
+        "pid" : pid,
+        "price" : price
+
+    };
+
+    let ind_rem = Wishlists.indexOf(myobj);
+
     Wishlists.splice(ind_rem, 1);
 
 
