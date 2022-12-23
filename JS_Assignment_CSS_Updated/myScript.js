@@ -55,21 +55,14 @@ let allProducts = [
         "MRP": 3000
     }
 ];
-
-
-for (let i = 0; i < allProducts.length; i++) {
-    allProducts[i].PId = Math.round((Math.random() * 100000000).toFixed(9));
-}
 function uniqueID() {
     return Math.floor(Math.random() * Date.now());
 }
-
 const cardHTML = allProducts.map((curr_obj) => {
     let del_tag = ``;
     if(curr_obj.MRP != 0){
         del_tag = `<del class = 'mrp'>SEK ${curr_obj.MRP}</del>`;
     }
-
         return `
         <div class="card">
             <img src='${curr_obj.image}' alt="sampleBackground" class = "card-image">
@@ -88,102 +81,46 @@ const cardHTML = allProducts.map((curr_obj) => {
         </div>
         `;
 });
-
-
-
 let Wishlists = [];
 document.getElementsByClassName("card-container")[0].innerHTML = cardHTML.join(" ");
-
-
 function retObj(PId){
     return allProducts.find((val)=>{ // will return the element that passed this function.
         return (val.PId == PId)? val:undefined; 
     });
 }
-
 function retTotal(){
     return Wishlists.reduce((total , obj)=>{
         return total + obj.price;
     },0);
 }
-
-/* Add Item function that adds the item if it's not present in the WishList : */ 
 function addItem(PId){
-
-    let myObj = retObj(PId); // Returns the object matched with this PId passed as an argument;
-
-    if(!Wishlists.includes(myObj)){
-
-        let req_tag = (myObj.MRP == 0)?`(You saved 0)` : `(You saved ${myObj.MRP - myObj.price})`;
-        Wishlists.push(myObj);
-
-        let total_sum = retTotal();
-        document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${total_sum}`;
-
-        document.getElementsByClassName("wish-lists")[0].innerHTML += `<li class = "${myObj.PId}">${myObj.name} - SEK ${myObj.price} ${req_tag} <a class  =  "rm-btn ${myObj.PId}" onclick = "removeWishList('${myObj.PId}')" > Remove </a></li>`;
-    }
-    else{
+    let myObj = retObj(PId); // Returns the object matched with this PId passed as an argument; 
+    if(Wishlists.includes(myObj)){
         alert("This item already exists in the list");
+        return false;
     }
-
+    let req_tag = (myObj.MRP == 0)?`(You saved 0)` : `(You saved ${myObj.MRP - myObj.price})`;
+    Wishlists.push(myObj);
+    let total_sum = retTotal();
+    document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${total_sum}`;
+    document.getElementsByClassName("wish-lists")[0].innerHTML += `<li class = "${myObj.PId}">${myObj.name} - SEK ${myObj.price} ${req_tag} <a class  =  "rm-btn ${myObj.PId}" onclick = "removeWishList('${myObj.PId}')" > Remove </a></li>`;
 }
-
-
-/* Removing Item on Clicking the remove button from WishList and HTML : */
 function removeWishList(PId) {
     let myObj = retObj(PId);
-
     let element1 = document.getElementsByClassName(myObj.PId)[0];
     let element2 = document.getElementsByClassName(myObj.PId)[1];
-
     element1.remove();
     element2.remove();
-
     let index = Wishlists.indexOf(myObj);
     Wishlists.splice(index,1);
-
-    let total_sum = retTotal();
-    
-    // Displaying New Total Value after Deletion : 
-    document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${total_sum}`;
+    wishlistMethod()
 }
-
-/* Read-more / Read-less Content : */
-// function showContent(pid) {
-//     let p_element = document.getElementsByClassName(pid+"1")[0];
-//     let element = document.getElementById(pid + "1");
-//     if (element.style.visibility != "hidden") {
-//         element.style.visibility = "hidden";
-//         p_element.innerHTML = "Show More Information <i class='fa-sharp fa-solid fa-chevron-down'></i> ";
-//     }
-//     else {
-//         element.style.visibility = "visible";
-//         p_element.innerHTML = "Show Less Information <i class='fa-solid fa-chevron-up'> </i> ";
-
-//     }
-
-// }
 function showContent(pid) {
     let p_element = document.getElementsByClassName(pid+"1")[0];
     let element = document.getElementById(pid + "1");
-
-    let content_size = ``;
-    let icon_class = '';
-
-    (element.style.visiblity != "hidden")?(element.style.visibility = "hidden") : (element.style.visibility = "visible");
-    
-    if (element.style.visibility != "hidden") {
-        element.style.visibility = "hidden";
-        
-        content_size = 'More';
-        icon_class = 'fa-sharp fa-solid fa-chevron-down';
-
-        p_element.innerHTML = "Show More Information <i class='fa-sharp fa-solid fa-chevron-down'></i> ";
-    }
-    else {
-        element.style.visibility = "visible";
-        p_element.innerHTML = "Show Less Information <i class='fa-solid fa-chevron-up'> </i> ";
-
-    }
-
+    let readclass=element.style.visibility;
+    let content_size= readclass != "hidden"?"More":"less";
+    let icon_class= readclass != "hidden"?"fa-sharp fa-solid fa-chevron-down":"fa-sharp fa-solid fa-chevron-up";
+    element.style.visibility=readclass != "hidden"?"hidden":"visible";
+    p_element.innerHTML = `Show ${content_size} Information <i class='${icon_class}'></i>`; 
 }

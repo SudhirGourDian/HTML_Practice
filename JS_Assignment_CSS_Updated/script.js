@@ -55,22 +55,15 @@ let allProducts = [
         "MRP": 3000
     }
 ];
-
-
-for (let i = 0; i < allProducts.length; i++) {
-    allProducts[i].PId = Math.round((Math.random() * 100000000).toFixed(9));
-}
 function uniqueID() {
     return Math.floor(Math.random() * Date.now());
 }
-
 const cardHTML = allProducts.map((curr_obj) => {
     let del_tag = ``;
-    if(curr_obj.MRP != 0){
+    if (curr_obj.MRP != 0) {
         del_tag = `<del class = 'mrp'>SEK ${curr_obj.MRP}</del>`;
     }
-
-        return `
+    return `
         <div class="card">
             <img src='${curr_obj.image}' alt="sampleBackground" class = "card-image">
             <h4 class = "prod-name">${curr_obj.name}</h4>
@@ -88,77 +81,54 @@ const cardHTML = allProducts.map((curr_obj) => {
         </div>
         `;
 });
-
-
-
 let Wishlists = [];
 document.getElementsByClassName("card-container")[0].innerHTML = cardHTML.join(" ");
-
-
-function retObj(PId){
-    return allProducts.find((val)=>{ // will return the element that passed this function.
-        return (val.PId == PId)? val:undefined; 
+function retObj(PId) {
+    return allProducts.find((val) => { // will return the element that passed this function.
+        return (val.PId == PId) ? val : undefined;
     });
 }
-
-function retTotal(){
-    return Wishlists.reduce((total , obj)=>{
-        return total + obj.price;
-    },0);
-}
-
-/* Add Item function that adds the item if it's not present in the WishList : */ 
-function addItem(PId){
-
+function addItem(PId) {
     let myObj = retObj(PId); // Returns the object matched with this PId passed as an argument;
-
-    if(!Wishlists.includes(myObj)){
-
-        let req_tag = (myObj.MRP == 0)?`(You saved 0)` : `(You saved ${myObj.MRP - myObj.price})`;
-        Wishlists.push(myObj);
-
-        let total_sum = retTotal();
-        document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${total_sum}`;
-
-        document.getElementsByClassName("wish-lists")[0].innerHTML += `<li class = "${myObj.PId}">${myObj.name} - SEK ${myObj.price} ${req_tag} <a class  =  "rm-btn ${myObj.PId}" onclick = "removeWishList('${myObj.PId}')" > Remove </a></li>`;
-    }
-    else{
+    if (Wishlists.includes(myObj)) {
         alert("This item already exists in the list");
+        return false;
     }
-
+    Wishlists.push(myObj);
+    manageWishlist();
 }
-
-
-/* Removing Item on Clicking the remove button from WishList and HTML : */
 function removeWishList(PId) {
     let myObj = retObj(PId);
-
     let element1 = document.getElementsByClassName(myObj.PId)[0];
     let element2 = document.getElementsByClassName(myObj.PId)[1];
-
     element1.remove();
     element2.remove();
-
     let index = Wishlists.indexOf(myObj);
-    Wishlists.splice(index,1);
-
-    let total_sum = retTotal();
-    
-    // Displaying New Total Value after Deletion : 
-    document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${total_sum}`;
+    Wishlists.splice(index, 1);
+    manageWishlist();
 }
-
-
 function showContent(pid) {
-    let p_element = document.getElementsByClassName(pid+"1")[0];
+    let p_element = document.getElementsByClassName(pid + "1")[0];
     let element = document.getElementById(pid + "1");
-    let readclass=element.style.visibility;
-
-    let content_size= readclass != "hidden"?"More":"less";
-    let icon_class= readclass != "hidden"?"fa-sharp fa-solid fa-chevron-down":"fa-sharp fa-solid fa-chevron-up";
-    element.style.visibility=readclass != "hidden"?"hidden":"visible";
-
+    let readclass = element.style.visibility;
+    let content_size = readclass != "hidden" ? "More" : "less";
+    let icon_class = readclass != "hidden" ? "fa-sharp fa-solid fa-chevron-down" : "fa-sharp fa-solid fa-chevron-up";
+    element.style.visibility = readclass != "hidden" ? "hidden" : "visible";
     p_element.innerHTML = `Show ${content_size} Information <i class='${icon_class}'></i>`;
-    
-
+}
+function manageWishlist() {
+    let totalWishlistPrice = 0;
+    if (Wishlists.length > 0) {
+        let wishListHtml = Wishlists.map(function (myObj) {
+            totalWishlistPrice += myObj.price; 
+            let req_tag = (myObj.MRP == 0) ? `(You saved 0)` : `(You saved ${myObj.MRP - myObj.price})`;
+            return `
+        <li class = "${myObj.PId}">${myObj.name} - SEK ${myObj.price} ${req_tag} <a class  =  "rm-btn ${myObj.PId}" onclick = "removeWishList('${myObj.PId}')" > Remove </a></li>
+        `;
+        });
+        document.getElementsByClassName("wish-lists")[0].innerHTML = wishListHtml.join("\n");
+    } else {
+        document.getElementsByClassName("wish-lists")[0].innerHTML = " ";
+    }
+    document.getElementsByClassName("total")[0].innerHTML = `Your Wishlist Total is: SEK ${totalWishlistPrice}`;
 }

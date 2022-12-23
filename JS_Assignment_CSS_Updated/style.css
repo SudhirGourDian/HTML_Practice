@@ -54,7 +54,7 @@
 .card-container{
     display : grid;
     grid-template-columns: auto  auto  auto;
-    grid-template-rows : 580px 580px;
+    grid-template-rows : 585px 585px;
 }
 
 .wish-list-h1{
